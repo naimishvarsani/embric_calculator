@@ -17,8 +17,44 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   TextEditingController _stichRatecontroller = TextEditingController();
+  TextEditingController _cpallustichRatecontroller = TextEditingController();
+  TextEditingController _cpalluheadRatecontroller = TextEditingController();
+  TextEditingController _pallustichRatecontroller = TextEditingController();
+  TextEditingController _palluheadRatecontroller = TextEditingController();
+  TextEditingController _sktstichRatecontroller = TextEditingController();
+  TextEditingController _sktheadRatecontroller = TextEditingController();
+  TextEditingController _blzstichRatecontroller = TextEditingController();
+  TextEditingController _blzheadRatecontroller = TextEditingController();
+  double? stitchCount;
+  double? threadLength;
+
+  void calculate() {
+    final width = double.tryParse(_stichRatecontroller.text);
+    final height = double.tryParse(_cpallustichRatecontroller.text);
+    final density = double.tryParse(_cpalluheadRatecontroller.text);
+
+    if (width != null && height != null && density != null) {
+      double area = width * height;
+      double stitches = area * density;
+      double thread = stitches / 1000; // Assuming 0.1 cm/thread per stitch
+
+      setState(() {
+        stitchCount = stitches;
+        threadLength = thread;
+      });
+    }
+  }
+
   @override
+  void dispose() {
+    _stichRatecontroller.dispose();
+    _cpallustichRatecontroller.dispose();
+    _cpalluheadRatecontroller.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
+    calculate();
     return Scaffold(
       backgroundColor: AppColors.bgcolor,
       body: SafeArea(
@@ -244,6 +280,7 @@ class _HomeViewState extends State<HomeView> {
                       height: 50,
                       child: Center(
                         child: TextFormField(
+                          controller: _cpallustichRatecontroller,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
@@ -264,6 +301,7 @@ class _HomeViewState extends State<HomeView> {
                       width: Get.width * 0.22,
                       height: 50,
                       child: TextFormField(
+                        controller: _cpalluheadRatecontroller,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
@@ -320,6 +358,7 @@ class _HomeViewState extends State<HomeView> {
                       height: 50,
                       child: Center(
                         child: TextFormField(
+                          controller: _pallustichRatecontroller,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
@@ -340,6 +379,7 @@ class _HomeViewState extends State<HomeView> {
                       width: Get.width * 0.22,
                       height: 50,
                       child: TextFormField(
+                        controller: _palluheadRatecontroller,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
@@ -396,6 +436,7 @@ class _HomeViewState extends State<HomeView> {
                       height: 50,
                       child: Center(
                         child: TextFormField(
+                          controller: _sktstichRatecontroller,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
@@ -416,6 +457,7 @@ class _HomeViewState extends State<HomeView> {
                       width: Get.width * 0.22,
                       height: 50,
                       child: TextFormField(
+                        controller: _sktheadRatecontroller,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),
@@ -472,6 +514,7 @@ class _HomeViewState extends State<HomeView> {
                       height: 50,
                       child: Center(
                         child: TextFormField(
+                          controller: _blzstichRatecontroller,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
@@ -492,6 +535,7 @@ class _HomeViewState extends State<HomeView> {
                       width: Get.width * 0.22,
                       height: 50,
                       child: TextFormField(
+                        controller: _blzheadRatecontroller,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold),

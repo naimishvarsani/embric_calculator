@@ -3,6 +3,7 @@
 import 'package:calculator/helpers/colors.dart';
 import 'package:calculator/helpers/common_widget.dart';
 import 'package:calculator/helpers/images.dart';
+import 'package:calculator/screens/design_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,7 +45,12 @@ class DesignListview extends StatelessWidget {
                 shrinkWrap: true,
                 physics: ClampingScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return dataWidget();
+                  return GestureDetector(
+                    onTap: () {
+                      Get.to(DesignDetailView());
+                    },
+                    child: dataWidget(),
+                  );
                 },
               ),
             )

@@ -1,3 +1,4 @@
+import 'package:calculator/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         translations: Messages(languages: languages),
         fallbackLocale: Locale(AppConstants.languages[0].languageCode,
             AppConstants.languages[0].countryCode),
-        home: BottomNavBar(),
+        home: SplashView(),
       );
     });
   }
