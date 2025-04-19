@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import, deprecated_member_use, unused_field, prefer_final_fields
 
+import 'package:calculator/screens/add_design_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,33 +17,95 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  TextEditingController _stichRatecontroller = TextEditingController();
-  TextEditingController _cpallustichRatecontroller = TextEditingController();
-  TextEditingController _cpalluheadRatecontroller = TextEditingController();
-  TextEditingController _pallustichRatecontroller = TextEditingController();
-  TextEditingController _palluheadRatecontroller = TextEditingController();
-  TextEditingController _sktstichRatecontroller = TextEditingController();
-  TextEditingController _sktheadRatecontroller = TextEditingController();
-  TextEditingController _blzstichRatecontroller = TextEditingController();
-  TextEditingController _blzheadRatecontroller = TextEditingController();
+  TextEditingController _stichRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _cpallustichRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _cpalluheadRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _pallustichRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _palluheadRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _sktstichRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _sktheadRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _blzstichRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController _blzheadRatecontroller =
+      TextEditingController(text: "0.0");
+  TextEditingController addmoneycontroller = TextEditingController(text: "0.0");
   double? stitchCount;
   double? threadLength;
 
-  void calculate() {
-    final width = double.tryParse(_stichRatecontroller.text);
-    final height = double.tryParse(_cpallustichRatecontroller.text);
-    final density = double.tryParse(_cpalluheadRatecontroller.text);
+  num c_pallu = 0.0;
+  num pallu = 0.0;
+  num skt = 0.0;
+  num blz = 0.0;
+  num fulltotal = 0.0;
+  num addamount = 0.0;
+  num newstichrate = 0.0;
 
-    if (width != null && height != null && density != null) {
-      double area = width * height;
-      double stitches = area * density;
-      double thread = stitches / 1000; // Assuming 0.1 cm/thread per stitch
+  // void calculate() {
+  //   final width = double.tryParse(_stichRatecontroller.text);
+  //   final height = double.tryParse(_cpallustichRatecontroller.text);
+  //   final density = double.tryParse(_cpalluheadRatecontroller.text);
 
-      setState(() {
-        stitchCount = stitches;
-        threadLength = thread;
-      });
+  //   if (width != null && height != null && density != null) {
+  //     double area = width * height;
+  //     double stitches = area * density;
+  //     double thread = stitches / 1000; // Assuming 0.1 cm/thread per stitch
+
+  //     setState(() {
+  //       stitchCount = stitches;
+  //       threadLength = thread;
+  //     });
+  //   }
+  // }
+  allclear() {
+    _stichRatecontroller.clear();
+    _cpallustichRatecontroller.clear();
+    _cpalluheadRatecontroller.clear();
+    _pallustichRatecontroller.clear();
+    _palluheadRatecontroller.clear();
+    _sktstichRatecontroller.clear();
+    _sktheadRatecontroller.clear();
+    _blzstichRatecontroller.clear();
+    _blzheadRatecontroller.clear();
+    addmoneycontroller.clear();
+    c_pallu = 0.0;
+    pallu = 0.0;
+    skt = 0.0;
+    blz = 0.0;
+    fulltotal = 0.0;
+    addamount = 0.0;
+    newstichrate = 0.0;
+    setState(() {});
+  }
+
+  void allcalculate() {
+    double safeParse(TextEditingController controller) {
+      return double.tryParse(
+              controller.text.isEmpty ? "0.0" : controller.text) ??
+          0.0;
     }
+
+    c_pallu = safeParse(_cpallustichRatecontroller) *
+        safeParse(_cpalluheadRatecontroller);
+    pallu = safeParse(_pallustichRatecontroller) *
+        safeParse(_palluheadRatecontroller);
+    skt =
+        safeParse(_sktstichRatecontroller) * safeParse(_sktheadRatecontroller);
+    blz =
+        safeParse(_blzstichRatecontroller) * safeParse(_blzheadRatecontroller);
+    addamount = safeParse(addmoneycontroller);
+    newstichrate = safeParse(_stichRatecontroller);
+
+    fulltotal = (c_pallu + pallu + skt + blz + addamount + newstichrate);
+
+    print("Logger");
+    setState(() {});
   }
 
   @override
@@ -54,7 +117,6 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget build(BuildContext context) {
-    calculate();
     return Scaffold(
       backgroundColor: AppColors.bgcolor,
       body: SafeArea(
@@ -93,6 +155,7 @@ class _HomeViewState extends State<HomeView> {
                           textSize: 12.0,
                           textWeight: FontWeight.w500),
                       TextFormField(
+                        controller: _stichRatecontroller,
                         style: TextStyle(
                             fontSize: 30, fontWeight: FontWeight.bold),
                         decoration: InputDecoration(
@@ -103,6 +166,9 @@ class _HomeViewState extends State<HomeView> {
                                 fontWeight: FontWeight.bold,
                                 color:
                                     AppColors.softtextcolor.withOpacity(.5))),
+                        onChanged: (value) {
+                          allcalculate();
+                        },
                       ),
                     ],
                   ),
@@ -142,6 +208,10 @@ class _HomeViewState extends State<HomeView> {
                                 fontWeight: FontWeight.bold,
                                 color:
                                     AppColors.softtextcolor.withOpacity(.5))),
+                        controller: addmoneycontroller,
+                        onChanged: (value) {
+                          allcalculate();
+                        },
                       ),
                     ],
                   ),
@@ -168,7 +238,7 @@ class _HomeViewState extends State<HomeView> {
                           textSize: 12.0,
                           textWeight: FontWeight.w500),
                       CommonWidget().poppinsText(
-                          text: "00.00",
+                          text: fulltotal.toStringAsFixed(2),
                           textWeight: FontWeight.bold,
                           textColor: AppColors.softtextcolor.withOpacity(.5),
                           textSize: 30.0),
@@ -176,32 +246,43 @@ class _HomeViewState extends State<HomeView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            height: 40,
-                            width: Get.width * 0.35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(width: 2),
+                          GestureDetector(
+                            onTap: () async {
+                              await allclear();
+                              allcalculate();
+                            },
+                            child: Container(
+                              height: 40,
+                              width: Get.width * 0.35,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(width: 2),
+                              ),
+                              child: Center(
+                                  child: CommonWidget().poppinsText(
+                                      text: "CANCEL",
+                                      textSize: 14.0,
+                                      textWeight: FontWeight.w700)),
                             ),
-                            child: Center(
-                                child: CommonWidget().poppinsText(
-                                    text: "CANCEL",
-                                    textSize: 14.0,
-                                    textWeight: FontWeight.w700)),
                           ),
-                          Container(
-                            height: 40,
-                            width: Get.width * 0.35,
-                            decoration: BoxDecoration(
-                              color: AppColors.redcolor,
-                              borderRadius: BorderRadius.circular(10),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(AddDesignView());
+                            },
+                            child: Container(
+                              height: 40,
+                              width: Get.width * 0.35,
+                              decoration: BoxDecoration(
+                                color: AppColors.redcolor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Center(
+                                  child: CommonWidget().poppinsText(
+                                      text: "SAVE",
+                                      textColor: AppColors.whitecolor,
+                                      textSize: 14.0,
+                                      textWeight: FontWeight.w700)),
                             ),
-                            child: Center(
-                                child: CommonWidget().poppinsText(
-                                    text: "SAVE",
-                                    textColor: AppColors.whitecolor,
-                                    textSize: 14.0,
-                                    textWeight: FontWeight.w700)),
                           ),
                         ],
                       ),
@@ -292,6 +373,9 @@ class _HomeViewState extends State<HomeView> {
                                   fontWeight: FontWeight.bold,
                                   color:
                                       AppColors.softtextcolor.withOpacity(.5))),
+                          onChanged: (value) {
+                            allcalculate();
+                          },
                         ),
                       ),
                     ),
@@ -313,6 +397,9 @@ class _HomeViewState extends State<HomeView> {
                                 fontWeight: FontWeight.bold,
                                 color:
                                     AppColors.softtextcolor.withOpacity(.5))),
+                        onChanged: (value) {
+                          allcalculate();
+                        },
                       ),
                     )
                   ],
@@ -328,7 +415,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 child: Center(
                   child: CommonWidget().poppinsText(
-                      text: "00.00",
+                      text: c_pallu.toStringAsFixed(2),
                       textSize: 14.0,
                       textWeight: FontWeight.w700),
                 ),
@@ -370,6 +457,9 @@ class _HomeViewState extends State<HomeView> {
                                   fontWeight: FontWeight.bold,
                                   color:
                                       AppColors.softtextcolor.withOpacity(.5))),
+                          onChanged: (value) {
+                            allcalculate();
+                          },
                         ),
                       ),
                     ),
@@ -391,6 +481,9 @@ class _HomeViewState extends State<HomeView> {
                                 fontWeight: FontWeight.bold,
                                 color:
                                     AppColors.softtextcolor.withOpacity(.5))),
+                        onChanged: (value) {
+                          allcalculate();
+                        },
                       ),
                     )
                   ],
@@ -406,7 +499,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 child: Center(
                   child: CommonWidget().poppinsText(
-                      text: "00.00",
+                      text: pallu.toStringAsFixed(2),
                       textSize: 14.0,
                       textWeight: FontWeight.w700),
                 ),
@@ -448,6 +541,9 @@ class _HomeViewState extends State<HomeView> {
                                   fontWeight: FontWeight.bold,
                                   color:
                                       AppColors.softtextcolor.withOpacity(.5))),
+                          onChanged: (value) {
+                            allcalculate();
+                          },
                         ),
                       ),
                     ),
@@ -469,6 +565,9 @@ class _HomeViewState extends State<HomeView> {
                                 fontWeight: FontWeight.bold,
                                 color:
                                     AppColors.softtextcolor.withOpacity(.5))),
+                        onChanged: (value) {
+                          allcalculate();
+                        },
                       ),
                     )
                   ],
@@ -484,7 +583,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 child: Center(
                   child: CommonWidget().poppinsText(
-                      text: "00.00",
+                      text: skt.toStringAsFixed(2),
                       textSize: 14.0,
                       textWeight: FontWeight.w700),
                 ),
@@ -526,6 +625,9 @@ class _HomeViewState extends State<HomeView> {
                                   fontWeight: FontWeight.bold,
                                   color:
                                       AppColors.softtextcolor.withOpacity(.5))),
+                          onChanged: (value) {
+                            allcalculate();
+                          },
                         ),
                       ),
                     ),
@@ -547,6 +649,9 @@ class _HomeViewState extends State<HomeView> {
                                 fontWeight: FontWeight.bold,
                                 color:
                                     AppColors.softtextcolor.withOpacity(.5))),
+                        onChanged: (value) {
+                          allcalculate();
+                        },
                       ),
                     )
                   ],
@@ -562,7 +667,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 child: Center(
                   child: CommonWidget().poppinsText(
-                      text: "00.00",
+                      text: blz.toStringAsFixed(2),
                       textSize: 14.0,
                       textWeight: FontWeight.w700),
                 ),
