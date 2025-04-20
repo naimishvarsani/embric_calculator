@@ -17,8 +17,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  TextEditingController _stichRatecontroller =
-      TextEditingController(text: "0.0");
+  TextEditingController _stichRatecontroller = TextEditingController(text: "");
   TextEditingController _cpallustichRatecontroller =
       TextEditingController(text: "0.0");
   TextEditingController _cpalluheadRatecontroller =
@@ -35,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
       TextEditingController(text: "0.0");
   TextEditingController _blzheadRatecontroller =
       TextEditingController(text: "0.0");
-  TextEditingController addmoneycontroller = TextEditingController(text: "0.0");
+  TextEditingController addmoneycontroller = TextEditingController(text: "");
   double? stitchCount;
   double? threadLength;
 
@@ -47,22 +46,6 @@ class _HomeViewState extends State<HomeView> {
   num addamount = 0.0;
   num newstichrate = 0.0;
 
-  // void calculate() {
-  //   final width = double.tryParse(_stichRatecontroller.text);
-  //   final height = double.tryParse(_cpallustichRatecontroller.text);
-  //   final density = double.tryParse(_cpalluheadRatecontroller.text);
-
-  //   if (width != null && height != null && density != null) {
-  //     double area = width * height;
-  //     double stitches = area * density;
-  //     double thread = stitches / 1000; // Assuming 0.1 cm/thread per stitch
-
-  //     setState(() {
-  //       stitchCount = stitches;
-  //       threadLength = thread;
-  //     });
-  //   }
-  // }
   allclear() {
     _stichRatecontroller.clear();
     _cpallustichRatecontroller.clear();
