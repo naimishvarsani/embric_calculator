@@ -74,14 +74,22 @@ class _HomeViewState extends State<HomeView> {
           0.0;
     }
 
-    c_pallu = safeParse(_cpallustichRatecontroller) *
-        safeParse(_cpalluheadRatecontroller);
-    pallu = safeParse(_pallustichRatecontroller) *
-        safeParse(_palluheadRatecontroller);
-    skt =
-        safeParse(_sktstichRatecontroller) * safeParse(_sktheadRatecontroller);
-    blz =
-        safeParse(_blzstichRatecontroller) * safeParse(_blzheadRatecontroller);
+    c_pallu = safeParse(_stichRatecontroller) *
+        safeParse(_cpallustichRatecontroller) *
+        safeParse(_cpalluheadRatecontroller) /
+        1000;
+    pallu = safeParse(_stichRatecontroller) *
+        safeParse(_pallustichRatecontroller) *
+        safeParse(_palluheadRatecontroller) /
+        1000;
+    skt = safeParse(_stichRatecontroller) *
+        safeParse(_sktstichRatecontroller) *
+        safeParse(_sktheadRatecontroller) /
+        1000;
+    blz = safeParse(_stichRatecontroller) *
+        safeParse(_blzstichRatecontroller) *
+        safeParse(_blzheadRatecontroller) /
+        1000;
     addamount = safeParse(addmoneycontroller);
     newstichrate = safeParse(_stichRatecontroller);
 
