@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:calculator/screens/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +8,6 @@ import 'controllers/lang_controller.dart';
 import 'helpers/app_constant.dart';
 import 'helpers/dependency_intl.dart' as dep;
 import 'helpers/messages.dart';
-import 'screens/bottom_nav_bar.dart';
 
 Future<void> main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -40,20 +41,4 @@ class MyApp extends StatelessWidget {
       );
     });
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   SystemChrome.setSystemUIOverlayStyle(
-  //     const SystemUiOverlayStyle(
-  //       statusBarColor: Colors.transparent,
-  //       statusBarIconBrightness: Brightness.dark,
-  //       statusBarBrightness: Brightness.light,
-  //     ),
-  //   );
-
-  //   return GetMaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     home: BottomNavBar(),
-  //   );
-  // }
 }

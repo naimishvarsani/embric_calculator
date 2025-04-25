@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, deprecated_member_use, unused_field, prefer_final_fields
+// ignore_for_file: unused_import, deprecated_member_use, unused_field, prefer_final_fields, non_constant_identifier_names, avoid_print, annotate_overrides
 
 import 'package:calculator/screens/add_design_view.dart';
 import 'package:flutter/material.dart';

@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../helpers/colors.dart';
 import '../helpers/common_widget.dart';
-import '../helpers/images.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});

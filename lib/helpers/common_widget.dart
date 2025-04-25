@@ -105,7 +105,6 @@ class LanguageWidget extends StatelessWidget {
           padding: EdgeInsets.all(7),
           child: Center(
             child: Column(
-              // mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
                   children: [

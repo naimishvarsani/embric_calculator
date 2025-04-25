@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings, prefer_const_constructors_in_immutables
+
 import "package:calculator/helpers/colors.dart";
 import "package:calculator/helpers/images.dart";
 import "package:calculator/screens/design_listview.dart";

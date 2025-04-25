@@ -22,7 +22,6 @@ class LocalizationController extends GetxController implements GetxService {
   List<LanguageModel> get languages => _languages;
 
   void loadCurrentLanguage() {
-    // only gets called during installation or rebooting
     _locale = Locale(
         sharedPreferences.getString(AppConstants.LANGUAGE_CODE) ??
             AppConstants.languages[0].languageCode,

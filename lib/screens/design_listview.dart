@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_interpolation_to_compose_strings
 
 import 'package:calculator/helpers/colors.dart';
 import 'package:calculator/helpers/common_widget.dart';
